@@ -67,6 +67,11 @@ Creator >> fabricarBomba [
 	^Bomba new
 ]
 
+{ #category : #'as yet unclassified' }
+Creator >> fabricarEste [
+	^Este new 
+]
+
 { #category : #'factory method' }
 Creator >> fabricarHabitacion [
 	^Habitacion new
@@ -76,10 +81,15 @@ Creator >> fabricarHabitacion [
 Creator >> fabricarHabitacion:unNum [
 	|hab|
 	hab:=Habitacion new num:unNum.
-	hab este:self fabricarPared.
+	hab num:unNum.
+	hab agregarOrientacion: self fabricarNorte; agregarOrientacion:self fabricarSur; agregarOrientacion:self fabricarEste; agregarOrientacion:self fabricarOeste.
+	
+	hab orientaciones do:[:each | hab ponerEnOr:each elemento:self fabricarPared].
+	
+	"hab este:self fabricarPared.
 	hab oeste:self fabricarPared.
 	hab norte:self fabricarPared.
-	hab sur:self fabricarPared.
+	hab sur:self fabricarPared."
 	^hab 
 	
 	
@@ -102,6 +112,16 @@ Creator >> fabricarModoAgresivo:unBicho [
 	unBicho poder:10.
 ]
 
+{ #category : #'as yet unclassified' }
+Creator >> fabricarNorte [
+	^Norte new 
+]
+
+{ #category : #'as yet unclassified' }
+Creator >> fabricarOeste [
+	^Oeste new 
+]
+
 { #category : #'factory method' }
 Creator >> fabricarPared [
 	^Pared new
@@ -110,4 +130,9 @@ Creator >> fabricarPared [
 { #category : #'factory method' }
 Creator >> fabricarPuerta [
 	^Puerta new
+]
+
+{ #category : #'as yet unclassified' }
+Creator >> fabricarSur [
+	^Sur new 
 ]
