@@ -1,6 +1,6 @@
 Class {
 	#name : #Habitacion,
-	#superclass : #ElementoMapa,
+	#superclass : #Contenedor,
 	#instVars : [
 		'num',
 		'norte',

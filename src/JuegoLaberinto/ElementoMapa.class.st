@@ -1,6 +1,9 @@
 Class {
 	#name : #ElementoMapa,
 	#superclass : #Object,
+	#instVars : [
+		'padre'
+	],
 	#category : #'JuegoLaberinto-Laberinto'
 }
 
@@ -10,4 +13,16 @@ ElementoMapa >> entrar [
 	self subclassResponsibility 	
 
 
+]
+
+{ #category : #accessing }
+ElementoMapa >> padre [
+
+	^ padre
+]
+
+{ #category : #accessing }
+ElementoMapa >> padre: anObject [
+
+	padre := anObject
 ]

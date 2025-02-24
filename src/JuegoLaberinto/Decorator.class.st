@@ -1,6 +1,6 @@
 Class {
 	#name : #Decorator,
-	#superclass : #ElementoMapa,
+	#superclass : #Hoja,
 	#instVars : [
 		'em'
 	],
