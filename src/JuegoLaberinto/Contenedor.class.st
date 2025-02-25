@@ -46,6 +46,11 @@ Contenedor >> initialize [
 	orientaciones:=OrderedCollection new.
 ]
 
+{ #category : #'gestionar-orientaciones' }
+Contenedor >> obtenerElementoOr:unaOr [
+	^unaOr obtenerElementoOrEn:self.
+]
+
 { #category : #accessing }
 Contenedor >> orientaciones [
 

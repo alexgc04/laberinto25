@@ -15,6 +15,14 @@ ElementoMapa >> entrar [
 
 ]
 
+{ #category : #caminar }
+ElementoMapa >> entrar:alguien [
+	"deberemos indicar quien entra"
+	self subclassResponsibility 	
+
+
+]
+
 { #category : #accessing }
 ElementoMapa >> padre [
 

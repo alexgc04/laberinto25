@@ -8,6 +8,11 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+Orientacion >> obtenerElementoOrEn:unContenedor [ 
+	self subclassResponsibility.
+]
+
+{ #category : #'as yet unclassified' }
 Orientacion >> ponerElemento:unEM en:unContenedor [
 	self subclassResponsibility 
 ]
