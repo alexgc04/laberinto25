@@ -33,7 +33,7 @@ LaberintoTest >> setUp [
 { #category : #tests }
 LaberintoTest >> testHabitaciones [
 
-	|hab1 hab2 pt12 norte sur este oeste unFm fm |
+	|hab1 hab2 pt12 norte sur este oeste fm |
 	
 	norte:=fm fabricarNorte.
 	sur:=fm fabricarSur.
@@ -45,13 +45,13 @@ LaberintoTest >> testHabitaciones [
 	self assert:hab1 esHabitacion. "hab1 class = Habitacion"
 	self assert:hab2 esHabitacion.
 	
-	self assert: (hab1 obtenerElementoOr:norte) hab1 norte esPared. 
-	self assert: (hab1 obtenerElementoOr:este) hab1 norte esPared.
-	self assert: (hab1 obtenerElementoOr:oeste) hab1 norte esPared.
+	self assert: (hab1 obtenerElementoOr:norte) esPared. 
+	self assert: (hab1 obtenerElementoOr:este) esPared.
+	self assert: (hab1 obtenerElementoOr:oeste) esPared.
 	
-	self assert: (hab1 obtenerElementoOr:sur) hab1 norte esPared. 
-	self assert: (hab1 obtenerElementoOr:este) hab1 norte esPared.
-	self assert: (hab1 obtenerElementoOr:oeste) hab1 norte esPared.
+	self assert: (hab2 obtenerElementoOr:sur) esPared. 
+	self assert: (hab2 obtenerElementoOr:este) esPared.
+	self assert: (hab2 obtenerElementoOr:oeste) esPared.
 	"hab1 obtenerElementoOr:norte. norte varb temporal"
 	"..."	
 	
@@ -59,6 +59,8 @@ LaberintoTest >> testHabitaciones [
 	self assert:pt12 esPuerta.
 	self assert: (hab2 obtenerElementoOr:norte) esPuerta.
 	self assert:pt12 abierta not.
+	self assert:pt12 equals:(hab2 obtenerElementoOr:norte).
+	
 
 ]
 
