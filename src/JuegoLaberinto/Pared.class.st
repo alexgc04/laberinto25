@@ -8,3 +8,8 @@ Class {
 Pared >> entrar [ 
 	Transcript show:'Te has chocado con la pared';cr.
 ]
+
+{ #category : #'as yet unclassified' }
+Pared >> esPared [ 
+	^true
+]

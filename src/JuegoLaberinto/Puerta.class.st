@@ -28,6 +28,11 @@ Puerta >> entrar [
 	ifFalse:[ Transcript show: 'La puerta esta cerrada';cr].
 ]
 
+{ #category : #'as yet unclassified' }
+Puerta >> esPuerta [ 
+	^true
+]
+
 { #category : #initialization }
 Puerta >> initialize [ 
 	abierta:=false.

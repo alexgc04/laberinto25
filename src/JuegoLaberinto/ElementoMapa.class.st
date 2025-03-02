@@ -23,6 +23,26 @@ ElementoMapa >> entrar:alguien [
 
 ]
 
+{ #category : #'as yet unclassified' }
+ElementoMapa >> esHabitacion [
+	^false
+]
+
+{ #category : #'as yet unclassified' }
+ElementoMapa >> esLaberinto [
+	^false
+]
+
+{ #category : #'as yet unclassified' }
+ElementoMapa >> esPared [
+	^false
+]
+
+{ #category : #'as yet unclassified' }
+ElementoMapa >> esPuerta [
+	^false
+]
+
 { #category : #accessing }
 ElementoMapa >> padre [
 
