@@ -171,6 +171,5 @@ class Juego:
         print("¡Bienvenido al juego del laberinto!")
 
 
-# Ejemplo de uso
 juego = Juego()
 juego.jugar()
