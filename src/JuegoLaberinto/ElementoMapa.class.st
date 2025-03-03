@@ -8,16 +8,7 @@ Class {
 }
 
 { #category : #caminar }
-ElementoMapa >> entrar [
-	"deberemos indicar quien entra"
-	self subclassResponsibility 	
-
-
-]
-
-{ #category : #caminar }
 ElementoMapa >> entrar:alguien [
-	"deberemos indicar quien entra"
 	self subclassResponsibility 	
 
 
@@ -57,5 +48,5 @@ ElementoMapa >> padre: anObject [
 
 { #category : #recorrido }
 ElementoMapa >> recorrer:unBloque [
-	self subclassResponsibility 
+	unBloque value:self
 ]

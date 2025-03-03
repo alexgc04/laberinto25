@@ -8,6 +8,11 @@ Class {
 	#category : #'JuegoLaberinto-Laberinto'
 }
 
+{ #category : #'as yet unclassified' }
+Juego >> abrirPuertas [ 
+	self laberinto abrirPuertas  
+]
+
 { #category : #'gestion-bichos' }
 Juego >> agregarBicho:unBicho [
 	self bichos add:unBicho
@@ -23,6 +28,11 @@ Juego >> bichos [
 Juego >> bichos: anObject [
 
 	bichos := anObject
+]
+
+{ #category : #'as yet unclassified' }
+Juego >> cerrarPuertas [ 
+	self laberinto cerrarPuertas 
 ]
 
 { #category : #'as yet unclassified' }

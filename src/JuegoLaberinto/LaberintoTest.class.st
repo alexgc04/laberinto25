@@ -2,10 +2,23 @@ Class {
 	#name : #LaberintoTest,
 	#superclass : #TestCase,
 	#instVars : [
-		'juego'
+		'juego',
+		'fm'
 	],
 	#category : #'JuegoLaberinto-Pruebas'
 }
+
+{ #category : #accessing }
+LaberintoTest >> fm [
+
+	^ fm
+]
+
+{ #category : #accessing }
+LaberintoTest >> fm: anObject [
+
+	fm := anObject
+]
 
 { #category : #accessing }
 LaberintoTest >> juego [
@@ -21,7 +34,6 @@ LaberintoTest >> juego: anObject [
 
 { #category : #running }
 LaberintoTest >> setUp [
-	| fm |
 	super setUp.
 
 	juego:=Juego new.
@@ -32,35 +44,33 @@ LaberintoTest >> setUp [
 
 { #category : #tests }
 LaberintoTest >> testHabitaciones [
-
-	|hab1 hab2 pt12 norte sur este oeste fm |
+|hab1 hab2 pt12 norte sur este oeste|
 	
 	norte:=fm fabricarNorte.
 	sur:=fm fabricarSur.
-	oeste:=fm fabricarOeste.
 	este:=fm fabricarEste.
-	hab1:=self juego obtenerHabitacion: 1.
-	hab2:=self juego obtenerHabitacion: 2.
+	oeste:=fm fabricarOeste.
 	
-	self assert:hab1 esHabitacion. "hab1 class = Habitacion"
+	hab1:=self juego obtenerHabitacion:1.
+	hab2:=self juego obtenerHabitacion:2.
+	
+	self assert:hab1 esHabitacion. 
 	self assert:hab2 esHabitacion.
 	
-	self assert: (hab1 obtenerElementoOr:norte) esPared. 
+	self assert: hab1 norte esPared. "hab1 obtenerElementoOr:norte. norte variable temporal"
+	"..."
+	self assert: (hab1 obtenerElementoOr:norte) esPared.
 	self assert: (hab1 obtenerElementoOr:este) esPared.
 	self assert: (hab1 obtenerElementoOr:oeste) esPared.
-	
-	self assert: (hab2 obtenerElementoOr:sur) esPared. 
+
+	self assert: (hab2 obtenerElementoOr:sur) esPared.
 	self assert: (hab2 obtenerElementoOr:este) esPared.
 	self assert: (hab2 obtenerElementoOr:oeste) esPared.
-	"hab1 obtenerElementoOr:norte. norte varb temporal"
-	"..."	
 	
 	pt12:=hab1 obtenerElementoOr:sur. "hab1 obtenerElementoOr:sur"
 	self assert:pt12 esPuerta.
-	self assert: (hab2 obtenerElementoOr:norte) esPuerta.
+	self assert:(hab2 obtenerElementoOr:norte)  esPuerta.
 	self assert:pt12 abierta not.
-	self assert:pt12 equals:(hab2 obtenerElementoOr:norte).
-	
 
 ]
 

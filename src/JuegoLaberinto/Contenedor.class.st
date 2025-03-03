@@ -75,5 +75,5 @@ Contenedor >> recorrer:unBloque [
 	unBloque value:self.
 	self hijos do:[:each | each recorrer:unBloque].
 	"tengo que recorrer las orientaciones"
-	self orientaciones recorrer:unBloque contenedor:self.
+	self orientaciones do:[:each | each recorrer:unBloque contenedor:self].
 ]

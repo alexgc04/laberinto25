@@ -21,10 +21,21 @@ Puerta >> abierta: anObject [
 	abierta := anObject
 ]
 
+{ #category : #'as yet unclassified' }
+Puerta >> abrir [
+	abierta:=true.
+		
+]
+
+{ #category : #'as yet unclassified' }
+Puerta >> cerrar [
+	abierta:=false.
+]
+
 { #category : #caminar }
-Puerta >> entrar [ 
+Puerta >> entrar:alguien [
 	self abierta 
-	ifTrue:[ Transcript show: 'La puerta esta abierta';cr]
+	ifTrue:[ alguien posicion = self lado1 ifTrue:[self lado2 entrar:alguien] ifFalse:[self lado1 entrar:alguien] ]
 	ifFalse:[ Transcript show: 'La puerta esta cerrada';cr].
 ]
 
@@ -61,4 +72,10 @@ Puerta >> lado2 [
 Puerta >> lado2: anObject [
 
 	lado2 := anObject
+]
+
+{ #category : #printing }
+Puerta >> printOn:aStream [
+	aStream nextPutAll:'Puerta-' ; nextPutAll:self lado1 num asString; nextPutAll:'-'; nextPutAll: self lado2 num asString.
+	
 ]
