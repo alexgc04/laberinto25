@@ -13,3 +13,8 @@ Este >> obtenerElementoOrEn:unContenedor [
 Este >> ponerElemento:unEM  en:unContenedor [
 	unContenedor este:unEM 
 ]
+
+{ #category : #recorrido }
+Este >> recorrer:unBloque contenedor:unContenedor [
+	unContenedor este recorrer:unBloque
+]

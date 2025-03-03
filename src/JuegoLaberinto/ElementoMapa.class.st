@@ -54,3 +54,8 @@ ElementoMapa >> padre: anObject [
 
 	padre := anObject
 ]
+
+{ #category : #recorrido }
+ElementoMapa >> recorrer:unBloque [
+	self subclassResponsibility 
+]

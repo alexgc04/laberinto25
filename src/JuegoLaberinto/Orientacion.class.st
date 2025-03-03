@@ -16,3 +16,8 @@ Orientacion >> obtenerElementoOrEn:unContenedor [
 Orientacion >> ponerElemento:unEM en:unContenedor [
 	self subclassResponsibility 
 ]
+
+{ #category : #recorrido }
+Orientacion >> recorrer:unBloque contenedor:unContenedor [
+	self subclassResponsibility 
+]
