@@ -26,6 +26,11 @@ Bicho >> esPerezoso [
 	^self modo esPerezoso 
 ]
 
+{ #category : #consulta }
+Bicho >> estaVivo [
+	^self vidas > 0 
+]
+
 { #category : #initialization }
 Bicho >> iniAgresivo [
 	self modo:Agresivo new.
