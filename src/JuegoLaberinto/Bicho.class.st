@@ -56,6 +56,11 @@ Bicho >> modo: anObject [
 	modo := anObject
 ]
 
+{ #category : #'as yet unclassified' }
+Bicho >> obtenerOrientacion [
+	^self posicion obtenerOrientacion
+]
+
 { #category : #accessing }
 Bicho >> poder [
 

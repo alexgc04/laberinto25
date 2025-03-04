@@ -5,6 +5,13 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+Este >> caminar:unBicho [
+	|pos|
+	pos := unBicho posicion.
+	pos este entrar:unBicho
+]
+
+{ #category : #'as yet unclassified' }
 Este >> obtenerElementoOrEn:unContenedor [
 	^unContenedor este
 ]
