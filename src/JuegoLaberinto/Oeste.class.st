@@ -1,8 +1,22 @@
 Class {
 	#name : #Oeste,
 	#superclass : #Orientacion,
+	#classVars : [
+		'UnicaInstancia'
+	],
 	#category : #'JuegoLaberinto-Laberinto'
 }
+
+{ #category : #accessing }
+Oeste class >> default [
+	UnicaInstancia ifNil: [UnicaInstancia:=super new].
+	 ^UnicaInstancia 
+]
+
+{ #category : #'instance creation' }
+Oeste class >> new [
+	self error:'No se puede crear objeto'
+]
 
 { #category : #'as yet unclassified' }
 Oeste >> caminar:unBicho [
