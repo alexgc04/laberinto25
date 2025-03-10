@@ -17,7 +17,7 @@ Personaje >> esAtacadoPor:unBicho [
 	self vidas:(self vidas-unBicho poder).
 	Transcript show: 'Vidas: ' ; nextPutAll: self vidas asString ; cr. "mensaje 13"
 	
-	self vidas < 0 ifTrue: [ self juego muerePersonaje. ]
+	self vidas <= 0 ifTrue: [ self juego muerePersonaje. ]
 ]
 
 { #category : #'as yet unclassified' }
