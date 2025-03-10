@@ -7,7 +7,8 @@ Class {
 	#instVars : [
 		'poder',
 		'posicion',
-		'vidas'
+		'vidas',
+		'juego'
 	],
 	#category : #'JuegoLaberinto-Laberinto'
 }
@@ -16,6 +17,18 @@ Class {
 Ente >> initialize [ 
 	vidas:=5.
 	poder:=1.
+]
+
+{ #category : #accessing }
+Ente >> juego [
+
+	^ juego
+]
+
+{ #category : #accessing }
+Ente >> juego: anObject [
+
+	juego := anObject
 ]
 
 { #category : #accessing }

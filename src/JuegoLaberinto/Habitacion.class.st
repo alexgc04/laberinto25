@@ -29,6 +29,26 @@ Habitacion >> este: anObject [
 	este := anObject
 ]
 
+{ #category : #'as yet unclassified' }
+Habitacion >> irAlEste:alguien [
+	self este entrar: alguien
+]
+
+{ #category : #'as yet unclassified' }
+Habitacion >> irAlNorte:alguien [
+	self norte entrar: alguien
+]
+
+{ #category : #'as yet unclassified' }
+Habitacion >> irAlOeste:alguien [
+	self oeste entrar: alguien
+]
+
+{ #category : #'as yet unclassified' }
+Habitacion >> irAlSur:alguien [
+	self sur entrar: alguien
+]
+
 { #category : #accessing }
 Habitacion >> norte [
 
