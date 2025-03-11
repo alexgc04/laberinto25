@@ -15,3 +15,8 @@ Agresivo >> dormir:unBicho [
 Agresivo >> esAgresivo [ 
 	^true
 ]
+
+{ #category : #printing }
+Agresivo >> printOn:aStream [
+	aStream nextPutAll:'Agresivo'
+]

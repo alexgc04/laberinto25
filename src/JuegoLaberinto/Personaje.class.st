@@ -10,14 +10,14 @@ Class {
 	#category : #'JuegoLaberinto-Laberinto'
 }
 
-{ #category : #'as yet unclassified' }
-Personaje >> esAtacadoPor:unBicho [
-	Transcript show:self printString ; nextPutAll: ' es atacado por ' ; nextPutAll: unBicho printString;cr.
-	
-	self vidas:(self vidas-unBicho poder).
-	Transcript show: 'Vidas: ' ; nextPutAll: self vidas asString ; cr. "mensaje 13"
-	
-	self vidas <= 0 ifTrue: [ self juego muerePersonaje. ]
+{ #category : #ataques }
+Personaje >> atacar [ 
+	self juego buscarBicho. 
+]
+
+{ #category : #ataques }
+Personaje >> heMuerto [ 
+	self juego muerePersonaje.
 ]
 
 { #category : #'as yet unclassified' }

@@ -41,13 +41,19 @@ Juego >> bichos: anObject [
 ]
 
 { #category : #ataques }
-Juego >> buscarPersonaje:unBicho [
-	| posBicho posPerson |
-	posBicho:=unBicho posicion. "mensajes 8 y 9"
-	posPerson:=self person posicion. "mensajes 10 y 11"
+Juego >> buscarBicho [
+	|bicho|
 	
-	posBicho = posPerson ifTrue: [ self person esAtacadoPor:unBicho ].	
+	bicho:= self bichos  detect:[:each | each estaVivo and:[each posicion = self person posicion]] ifNone:[nil]. "mensajes 10 y 11"
+	
+	bicho ifNotNil:[bicho esAtacadoPor: self person].
+]
 
+{ #category : #ataques }
+Juego >> buscarPersonaje:unBicho [
+	| bicho posPerson |
+	bicho := self bichos detect: [ :each | each estaVivo and:[each posicion = posPerson ]] ifNone:[nil].
+	bicho ifNotNil: [ bicho esAtacadoPor: self person ].
 ]
 
 { #category : #'as yet unclassified' }
@@ -231,6 +237,21 @@ Juego >> eliminarBicho:unBicho [
 	self bichos remove:unBicho ifAbsent:[ Transcript show: 'No existe el bicho';cr.]
 ]
 
+{ #category : #'gestion-bichos' }
+Juego >> estanTodosLosBichosMuertos [
+	|bicho|
+	
+	bicho := self bichos detect: [ :each | each estaVivo ] ifNone: [ nil ].
+	(bicho isNil and: [ self person estaVivo ]) ifTrue: [ self ganaPersonaje ]
+	
+]
+
+{ #category : #'gestion-bichos' }
+Juego >> ganaPersonaje [
+	Transcript show: 'Fin juego: gana personaje';cr.
+	
+]
+
 { #category : #accessing }
 Juego >> hilos [
 
@@ -305,6 +326,8 @@ Juego >> terminarBicho:unBicho [
 	unBicho vidas:0.
 	Transcript show:unBicho printString ; nextPutAll: ' muere';cr.
 	
+	"comprobar si todos bichos estan moridos"
+	self estanTodosLosBichosMuertos
 ]
 
 { #category : #'gestion-bichos' }

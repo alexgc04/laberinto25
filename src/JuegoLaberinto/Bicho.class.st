@@ -28,9 +28,9 @@ Bicho >> esPerezoso [
 	^self modo esPerezoso 
 ]
 
-{ #category : #consulta }
-Bicho >> estaVivo [
-	^self vidas > 0 
+{ #category : #ataques }
+Bicho >> heMuerto [ 
+	self juego terminarBicho: self.
 ]
 
 { #category : #initialization }
@@ -60,4 +60,9 @@ Bicho >> modo: anObject [
 { #category : #'as yet unclassified' }
 Bicho >> obtenerOrientacion [
 	^self posicion obtenerOrientacion
+]
+
+{ #category : #printing }
+Bicho >> printOn:aStream [
+	aStream nextPutAll:'Bicho-' ; nextPutAll:self modo asString.
 ]
