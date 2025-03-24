@@ -22,7 +22,7 @@ Oeste class >> new [
 Oeste >> caminar:unBicho [
 	|pos|
 	pos := unBicho posicion.
-	pos oeste entrar:unBicho
+	pos irAlOeste:unBicho 
 ]
 
 { #category : #'as yet unclassified' }

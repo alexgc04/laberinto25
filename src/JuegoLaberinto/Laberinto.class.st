@@ -52,3 +52,10 @@ Laberinto >> obtenerHabitacion:unNum [
 Laberinto >> printOn:aStream [
 	aStream nextPutAll:'Laberinto'
 ]
+
+{ #category : #recorrido }
+Laberinto >> recorrer:unBloque [
+	unBloque value:self.
+	self hijos do:[:each | each recorrer:unBloque].
+	"no tiene forma, luego no recorre las orientaciones"
+]

@@ -20,6 +20,11 @@ Forma >> initialize [
 	orientaciones:=OrderedCollection new.
 ]
 
+{ #category : #movimiento }
+Forma >> irAlNorte: alguien [
+	self subclassResponsibility 
+]
+
 { #category : #'gestion-orientaciones' }
 Forma >> obtenerElementoOr:unaOr [
 	^unaOr obtenerElementoOrEn:self.
@@ -32,6 +37,11 @@ Forma >> obtenerOrientacion [
 	^self orientaciones at:ind.
 ]
 
+{ #category : #'gestion-orientaciones' }
+Forma >> obtenerOrientaciones [ 
+	^self orientaciones 
+]
+
 { #category : #accessing }
 Forma >> orientaciones [
 
@@ -42,4 +52,9 @@ Forma >> orientaciones [
 Forma >> orientaciones: anObject [
 
 	orientaciones := anObject
+]
+
+{ #category : #accessing }
+Forma >> ponerEnOr:unaOr elemento:unEM [
+	unaOr ponerElemento:unEM en:self.
 ]

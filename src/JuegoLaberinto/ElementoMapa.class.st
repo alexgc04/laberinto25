@@ -15,6 +15,11 @@ ElementoMapa >> entrar:alguien [
 ]
 
 { #category : #'as yet unclassified' }
+ElementoMapa >> esArmario [ 
+	^false
+]
+
+{ #category : #'as yet unclassified' }
 ElementoMapa >> esHabitacion [
 	^false
 ]

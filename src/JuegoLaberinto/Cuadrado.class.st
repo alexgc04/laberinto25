@@ -25,6 +25,26 @@ Cuadrado >> este: anObject [
 	este := anObject
 ]
 
+{ #category : #movimiento }
+Cuadrado >> irAlEste: alguien [
+	self este entrar: alguien
+]
+
+{ #category : #movimiento }
+Cuadrado >> irAlNorte: alguien [
+	self norte entrar: alguien
+]
+
+{ #category : #movimiento }
+Cuadrado >> irAlOeste: alguien [
+	self oeste entrar: alguien
+]
+
+{ #category : #movimiento }
+Cuadrado >> irAlSur: alguien [
+	self sur entrar: alguien
+]
+
 { #category : #accessing }
 Cuadrado >> norte [
 
