@@ -21,6 +21,7 @@ LaberintoBuilder >> fabricarArmario:unNum en:unContenedor [
 	arm orientaciones do:[:each | arm ponerEnOr:each elemento:self fabricarPared].
 	
 	
+	
 	unContenedor agregarHijo: arm.
 	
 	^arm
@@ -143,6 +144,13 @@ LaberintoBuilder >> fabricarPuertaL1:num1 or1:strOr1 L2:num2 or2:strOr2 [
 { #category : #'metodos fabricacion' }
 LaberintoBuilder >> fabricarSur [ 
 	^Sur default 
+]
+
+{ #category : #'metodos fabricacion' }
+LaberintoBuilder >> fabricarTunelEn:unContenedor [
+	|tunel|
+	tunel:= Tunel new.
+	unContenedor agregarHijo: tunel.
 ]
 
 { #category : #accessing }
