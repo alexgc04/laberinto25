@@ -4,6 +4,11 @@ Class {
 	#category : #'JuegoLaberinto-Laberinto'
 }
 
+{ #category : #'as yet unclassified' }
+Habitacion >> esHabitacion [ 
+	^true
+]
+
 { #category : #printing }
 Habitacion >> printOn:aStream [
 	aStream nextPutAll:'Hab' ; nextPutAll:self num asString

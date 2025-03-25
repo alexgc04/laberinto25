@@ -44,6 +44,11 @@ Puerta >> esPuerta [
 	^true
 ]
 
+{ #category : #'as yet unclassified' }
+Puerta >> estaAbierta [
+	^self abierta 
+]
+
 { #category : #initialization }
 Puerta >> initialize [ 
 	abierta:=false.

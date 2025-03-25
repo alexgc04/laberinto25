@@ -20,6 +20,11 @@ ElementoMapa >> esArmario [
 ]
 
 { #category : #'as yet unclassified' }
+ElementoMapa >> esBomba [
+	^false
+]
+
+{ #category : #'as yet unclassified' }
 ElementoMapa >> esHabitacion [
 	^false
 ]
@@ -36,6 +41,11 @@ ElementoMapa >> esPared [
 
 { #category : #'as yet unclassified' }
 ElementoMapa >> esPuerta [
+	^false
+]
+
+{ #category : #'as yet unclassified' }
+ElementoMapa >> esTunel [
 	^false
 ]
 

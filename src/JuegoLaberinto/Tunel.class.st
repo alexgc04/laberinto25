@@ -17,6 +17,11 @@ Tunel >> entrar:alguien [
 
 ]
 
+{ #category : #'as yet unclassified' }
+Tunel >> esTunel [ 
+	^true
+]
+
 { #category : #accessing }
 Tunel >> laberinto [
 

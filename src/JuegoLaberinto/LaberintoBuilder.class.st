@@ -6,7 +6,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'juego',
-		'laberinto'
+		'director',
+		'dict'
 	],
 	#category : #'JuegoLaberinto-Builder'
 }

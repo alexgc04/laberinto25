@@ -27,6 +27,11 @@ Bomba >> entrar:alguien [
 	ifFalse:[self em entrar:alguien]
 ]
 
+{ #category : #'as yet unclassified' }
+Bomba >> esBomba [ 
+	^true
+]
+
 { #category : #initialization }
 Bomba >> initialize [ 
 	activa:=false.
