@@ -138,6 +138,24 @@ LaberintoBuilderTest >> setUp [
 ]
 
 { #category : #tests }
+LaberintoBuilderTest >> testBichoAtaca [ 
+	|hab1 bicho person|
+	hab1:=self juego obtenerHabitacion:1.
+	bicho:=self juego bichos at:1.
+	person:= self juego person.
+	
+	self assert: bicho notNil.
+	self assert: person notNil.
+	
+	hab1 entrar:bicho.
+	hab1 entrar:person.
+	
+	bicho atacar.
+	
+	self assert: person vidas equals:0.
+]
+
+{ #category : #tests }
 LaberintoBuilderTest >> testIniciales [ 
 	self assert:self juego notNil.
 	self assert:self juego laberinto notNil.
