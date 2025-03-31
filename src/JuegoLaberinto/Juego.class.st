@@ -62,6 +62,11 @@ Juego >> cerrarPuertas [
 	self laberinto cerrarPuertas 
 ]
 
+{ #category : #prototype }
+Juego >> clonarLaberinto [
+	^self prototipo veryDeepCopy
+]
+
 { #category : #'as yet unclassified' }
 Juego >> crear4h2b:unFm [
 	
