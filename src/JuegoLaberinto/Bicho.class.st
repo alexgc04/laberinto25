@@ -18,6 +18,11 @@ Bicho >> atacar [
 	self juego buscarPersonaje:self.
 ]
 
+{ #category : #'as yet unclassified' }
+Bicho >> buscarTunel [ 
+	self modo buscarTunelBicho:self.
+]
+
 { #category : #consulta }
 Bicho >> esAgresivo [ 
 	^self modo esAgresivo 

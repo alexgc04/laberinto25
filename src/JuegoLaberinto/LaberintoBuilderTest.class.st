@@ -83,6 +83,8 @@ LaberintoBuilderTest >> comprobarPuertaDe:unNum orientacion:unaOr a:otroNum orie
 
 { #category : #'as yet unclassified' }
 LaberintoBuilderTest >> comprobarTunelEn:unContenedor [	
+	|tunel|
+	tunel:=
 	self assert:((unContenedor hijos detect:[:each | each esTunel ] ifNone:[nil]) esTunel).
 	"comprobar que funciona el proxy virtual"
 ]
@@ -182,6 +184,29 @@ LaberintoBuilderTest >> testPersonaje [
 	"self juego obtenerPosicionPersonaje"
 	self assert:self juego person posicion equals:hab.
 	self assert:self juego person vidas equals:5.	
+
+
+
+]
+
+{ #category : #tests }
+LaberintoBuilderTest >> testPersonajeAtaca [
+	|hab1 bicho person|
+	hab1:=self juego obtenerHabitacion:1.
+	bicho:=self juego bichos at:1.
+	person:= self juego person.
+	
+	self assert: bicho notNil.
+	self assert: person notNil.
+	
+	hab1 entrar:bicho.
+	hab1 entrar:person.
+	
+	self assert: bicho posicion equals: person posicion.
+	person atacar.
+	
+	self assert: bicho vidas equals:4.
+
 
 
 
