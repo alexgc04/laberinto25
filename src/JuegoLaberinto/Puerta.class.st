@@ -2,41 +2,31 @@ Class {
 	#name : #Puerta,
 	#superclass : #ElementoMapa,
 	#instVars : [
-		'abierta',
 		'lado1',
-		'lado2'
+		'lado2',
+		'estado'
 	],
 	#category : #'JuegoLaberinto-Laberinto'
 }
 
-{ #category : #accessing }
-Puerta >> abierta [
-
-	^ abierta
-]
-
-{ #category : #accessing }
-Puerta >> abierta: anObject [
-
-	abierta := anObject
-]
-
 { #category : #'as yet unclassified' }
 Puerta >> abrir [
-	abierta:=true.
-		
+	"abierta:=true."
+	self estado	abrir:self
 ]
 
 { #category : #'as yet unclassified' }
 Puerta >> cerrar [
-	abierta:=false.
+	"Transcript show:self printString; nextPutAll: ' abierta'; cr."
+	self estado:self.
 ]
 
 { #category : #caminar }
 Puerta >> entrar:alguien [
-	self abierta 
+	self estado entrar:alguien puerta:self.
+	"self abierta 
 	ifTrue:[ alguien posicion = self lado1 ifTrue:[self lado2 entrar:alguien] ifFalse:[self lado1 entrar:alguien] ]
-	ifFalse:[ Transcript show: 'La puerta esta cerrada';cr].
+	ifFalse:[ Transcript show: 'La puerta esta cerrada';cr]."
 ]
 
 { #category : #'as yet unclassified' }
@@ -46,13 +36,25 @@ Puerta >> esPuerta [
 
 { #category : #'as yet unclassified' }
 Puerta >> estaAbierta [
-	^self abierta 
+	^self estado estaAbierta 
+]
+
+{ #category : #accessing }
+Puerta >> estado [
+
+	^ estado
+]
+
+{ #category : #accessing }
+Puerta >> estado: anObject [
+
+	estado := anObject
 ]
 
 { #category : #initialization }
 Puerta >> initialize [ 
-	abierta:=false.
-	"self abierta:false"
+	estado:=Cerrada new.
+	
 ]
 
 { #category : #accessing }
@@ -83,4 +85,9 @@ Puerta >> lado2: anObject [
 Puerta >> printOn:aStream [
 	aStream nextPutAll:'Puerta-' ; nextPutAll:self lado1 num asString; nextPutAll:'-'; nextPutAll: self lado2 num asString.
 	
+]
+
+{ #category : #caminar }
+Puerta >> puedeEntrar:alguien [
+	alguien posicion = self lado1 ifTrue:[self lado2 entrar:alguien] ifFalse:[self lado1 entrar:alguien].
 ]
