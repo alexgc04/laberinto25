@@ -6,3 +6,8 @@ Class {
 	#superclass : #Comando,
 	#category : #'JuegoLaberinto-Laberinto'
 }
+
+{ #category : #'as yet unclassified' }
+Entrar >> ejecutar:alguien [
+	self receptor entrar:alguien
+]

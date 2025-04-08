@@ -143,6 +143,7 @@ LaberintoBuilder >> fabricarPuertaL1:num1 or1:strOr1 L2:num2 or2:strOr2 [
 	pt:= Puerta new.
 	pt lado1: hab1.
 	pt lado2: hab2.
+	pt agregarComando: (Abrir new receptor:pt).
 	
 	hab1 ponerEnOr: obOr1 elemento: pt.
 	hab2 ponerEnOr: obOr2 elemento: pt.
