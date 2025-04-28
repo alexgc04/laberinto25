@@ -13,3 +13,8 @@ Habitacion >> esHabitacion [
 Habitacion >> printOn:aStream [
 	aStream nextPutAll:'Hab' ; nextPutAll:self num asString
 ]
+
+{ #category : #'as yet unclassified' }
+Habitacion >> visitarContenedor:unVisitor [
+	unVisitor visitarHabitacion:self
+]
