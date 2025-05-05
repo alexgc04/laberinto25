@@ -8,6 +8,12 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+Orientacion >> calcularPosicionDesde:unaForma [
+	self subclassResponsibility 
+
+]
+
+{ #category : #'as yet unclassified' }
 Orientacion >> caminar:unBicho [
 	self subclassResponsibility 
 ]

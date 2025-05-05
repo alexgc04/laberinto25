@@ -16,6 +16,21 @@ Puerta >> abrir [
 ]
 
 { #category : #'as yet unclassified' }
+Puerta >> calcularPosicionDesde: unCont en: unPunto [
+	self visitada ifTrue:[^self].
+	self visitada:true.
+	unCont num = self lado1 num
+				ifTrue: 
+					[
+					self lado2 punto: unPunto.
+					self lado2 calcularPosicion]
+				ifFalse: 
+					[
+					self lado1 punto: unPunto.
+					self lado1 calcularPosicion]
+]
+
+{ #category : #'as yet unclassified' }
 Puerta >> cerrar [
 	"Transcript show:self printString; nextPutAll: ' abierta'; cr."
 	self estado:self.

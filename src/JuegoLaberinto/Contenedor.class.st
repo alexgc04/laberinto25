@@ -34,6 +34,12 @@ Contenedor >> agregarOrientacion:unaOr [
 ]
 
 { #category : #'as yet unclassified' }
+Contenedor >> calcularPosicion [
+	self forma calcularPosicion
+
+]
+
+{ #category : #'as yet unclassified' }
 Contenedor >> eliminarHijo:unEM [
 	self hijos remove:unEM ifAbsent:["no existe ese objeto"]
 ]
@@ -45,6 +51,18 @@ Contenedor >> entrar:alguien [
 	
 	alguien buscarTunel.
 	
+]
+
+{ #category : #accessing }
+Contenedor >> extent [
+	^self forma extent
+
+]
+
+{ #category : #geometry }
+Contenedor >> extent:unPunto [
+	self forma extent:unPunto
+
 ]
 
 { #category : #accessing }
@@ -134,6 +152,18 @@ Contenedor >> obtenerOrientaciones [
 Contenedor >> ponerEnOr:unaOr elemento:unEM [
 	"unaOr ponerElemento:unEM en:self."
 	self forma ponerEnOr:unaOr elemento:unEM 
+]
+
+{ #category : #accessing }
+Contenedor >> punto [
+	^self forma punto
+
+]
+
+{ #category : #accessing }
+Contenedor >> punto:unPunto [
+	self forma punto:unPunto
+
 ]
 
 { #category : #recorrido }

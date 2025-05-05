@@ -19,6 +19,14 @@ Oeste class >> new [
 ]
 
 { #category : #'as yet unclassified' }
+Oeste >> calcularPosicionDesde: unaForma [
+	| unPunto |
+	unPunto := (unaForma punto x-1) @ (unaForma punto y).
+	unaForma este calcularPosicionDesde: unaForma en: unPunto
+
+]
+
+{ #category : #'as yet unclassified' }
 Oeste >> caminar:unBicho [
 	|pos|
 	pos := unBicho posicion.

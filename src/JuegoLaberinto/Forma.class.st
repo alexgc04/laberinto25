@@ -5,7 +5,10 @@ Class {
 	#name : #Forma,
 	#superclass : #Object,
 	#instVars : [
-		'orientaciones'
+		'orientaciones',
+		'punto',
+		'extent',
+		'num'
 	],
 	#category : #'JuegoLaberinto-Laberinto'
 }
@@ -13,6 +16,24 @@ Class {
 { #category : #'gestion-orientaciones' }
 Forma >> agregarOrientacion:unaOr [
 	self orientaciones add:unaOr.
+]
+
+{ #category : #'as yet unclassified' }
+Forma >> calcularPosicion [
+	self orientaciones do:[:or |
+		or calcularPosicionDesde:self ]
+]
+
+{ #category : #accessing }
+Forma >> extent [
+
+	^ extent
+]
+
+{ #category : #accessing }
+Forma >> extent: anObject [
+
+	extent := anObject
 ]
 
 { #category : #initialization }
@@ -23,6 +44,18 @@ Forma >> initialize [
 { #category : #movimiento }
 Forma >> irAlNorte: alguien [
 	self subclassResponsibility 
+]
+
+{ #category : #accessing }
+Forma >> num [
+
+	^ num
+]
+
+{ #category : #accessing }
+Forma >> num: anObject [
+
+	num := anObject
 ]
 
 { #category : #'gestion-orientaciones' }
@@ -57,4 +90,16 @@ Forma >> orientaciones: anObject [
 { #category : #accessing }
 Forma >> ponerEnOr:unaOr elemento:unEM [
 	unaOr ponerElemento:unEM en:self.
+]
+
+{ #category : #accessing }
+Forma >> punto [
+
+	^ punto
+]
+
+{ #category : #accessing }
+Forma >> punto: anObject [
+
+	punto := anObject
 ]
