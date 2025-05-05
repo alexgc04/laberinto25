@@ -17,8 +17,8 @@ Contenedor >> aceptar:unVisitor [
 
 	self visitarContenedor: unVisitor.
 	self hijos do:[:each | each aceptar:unVisitor].
-	"tengo que recorrer las orientaciones"
 	"self obtenerOrientaciones do:[:each | each aceptar:unVisitor contenedor:self forma]."
+
 ]
 
 { #category : #'gestion-hijos' }

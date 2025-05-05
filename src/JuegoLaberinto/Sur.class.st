@@ -22,7 +22,7 @@ Sur class >> new [
 Sur >> calcularPosicionDesde: unaForma [
 	| unPunto |
 	unPunto := (unaForma punto x) @ (unaForma punto y+1).
-	unaForma este calcularPosicionDesde: unaForma en: unPunto
+	unaForma sur calcularPosicionDesde: unaForma en: unPunto
 
 ]
 

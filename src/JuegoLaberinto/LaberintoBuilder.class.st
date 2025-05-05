@@ -16,6 +16,8 @@ LaberintoBuilder >> fabricarArmario:unNum en:unContenedor [
 	|arm|
 	arm:=Armario new num:unNum.
 	arm num:unNum.
+	arm forma:self fabricarForma.
+	arm forma num:unNum.
 	"arm agregarOrientacion: self fabricarNorte; agregarOrientacion:self fabricarSur; agregarOrientacion:self fabricarEste; agregarOrientacion:self fabricarOeste."
 	
 	arm obtenerOrientaciones do:[:each | arm ponerEnOr:each elemento:self fabricarPared].
@@ -92,6 +94,7 @@ LaberintoBuilder >> fabricarHabitacion:unNum [
 	hab:=Habitacion new.
 	hab num:unNum.
 	hab forma:self fabricarForma.
+	hab forma num:unNum.
 	"hab agregarOrientacion: self fabricarNorte; agregarOrientacion:self fabricarSur; agregarOrientacion:self fabricarEste; agregarOrientacion:self fabricarOeste."
 	
 	hab obtenerOrientaciones do:[:each | hab ponerEnOr:each elemento:self fabricarPared].

@@ -22,7 +22,7 @@ Norte class >> new [
 Norte >> calcularPosicionDesde: unaForma [
 	| unPunto |
 	unPunto := (unaForma punto x) @ (unaForma punto y-1).
-	unaForma este calcularPosicionDesde: unaForma en: unPunto
+	unaForma norte calcularPosicionDesde: unaForma en: unPunto
 
 ]
 

@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'lado1',
 		'lado2',
-		'estado'
+		'estado',
+		'visitada'
 	],
 	#category : #'JuegoLaberinto-Laberinto'
 }
@@ -16,10 +17,10 @@ Puerta >> abrir [
 ]
 
 { #category : #'as yet unclassified' }
-Puerta >> calcularPosicionDesde: unCont en: unPunto [
+Puerta >> calcularPosicionDesde: unaForma en: unPunto [
 	self visitada ifTrue:[^self].
 	self visitada:true.
-	unCont num = self lado1 num
+	unaForma num = self lado1 num
 				ifTrue: 
 					[
 					self lado2 punto: unPunto.
@@ -70,7 +71,7 @@ Puerta >> estado: anObject [
 Puerta >> initialize [ 
 	super initialize.
 	estado:=Cerrada new.
-	
+	visitada:=false.
 ]
 
 { #category : #accessing }
@@ -106,4 +107,16 @@ Puerta >> printOn:aStream [
 { #category : #caminar }
 Puerta >> puedeEntrar:alguien [
 	alguien posicion = self lado1 ifTrue:[self lado2 entrar:alguien] ifFalse:[self lado1 entrar:alguien].
+]
+
+{ #category : #accessing }
+Puerta >> visitada [
+
+	^ visitada
+]
+
+{ #category : #accessing }
+Puerta >> visitada: anObject [
+
+	visitada := anObject
 ]

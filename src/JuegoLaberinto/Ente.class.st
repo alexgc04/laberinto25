@@ -134,6 +134,7 @@ Ente >> vidas [
 
 { #category : #accessing }
 Ente >> vidas: anObject [
+	vidas := anObject.
+	self changed:#vidas.
 
-	vidas := anObject
 ]

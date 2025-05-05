@@ -22,7 +22,7 @@ Oeste class >> new [
 Oeste >> calcularPosicionDesde: unaForma [
 	| unPunto |
 	unPunto := (unaForma punto x-1) @ (unaForma punto y).
-	unaForma este calcularPosicionDesde: unaForma en: unPunto
+	unaForma oeste calcularPosicionDesde: unaForma en: unPunto
 
 ]
 
