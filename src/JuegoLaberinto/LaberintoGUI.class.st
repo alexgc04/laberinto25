@@ -38,6 +38,11 @@ Class {
 	#category : #'JuegoLaberinto-Vista'
 }
 
+{ #category : #acciones }
+LaberintoGUI >> abrirPuertas [
+	self juego abrirPuertas 
+]
+
 { #category : #'as yet unclassified' }
 LaberintoGUI >> agregarPersonaje:unaCadena [
 	self juego agregarPersonaje: unaCadena.
@@ -148,6 +153,35 @@ LaberintoGUI >> dibujarLaberinto [
 	self juego laberinto aceptar: self. "self juego dibujar:self"
 
 	self mostrarVidasPersonaje.
+	self mostrarPersonaje.
+	self mostrarAbrirPuertas.
+	self mostrarLanzarBichos.
+	self mostrarDetenerBichos.
+	self mostrarVolverAJugar.
+	
+	
+	
+	
+	
+
+]
+
+{ #category : #'as yet unclassified' }
+LaberintoGUI >> handlesKeyDown: anEvent [
+	^ true
+
+]
+
+{ #category : #'event handling' }
+LaberintoGUI >> handlesMouseDown: anEvent [
+	^true
+
+]
+
+{ #category : #'event handling' }
+LaberintoGUI >> handlesMouseOver: anEvent [
+^ true
+
 ]
 
 { #category : #'as yet unclassified' }
@@ -182,6 +216,24 @@ LaberintoGUI >> juego [
 LaberintoGUI >> juego: anObject [
 
 	juego := anObject
+]
+
+{ #category : #'event handling' }
+LaberintoGUI >> keyDown: anEvent [
+	| key |
+	key := anEvent key.
+"	Transcript show:key value asString;cr."
+	key = KeyboardKey up ifTrue: [ self person irAlNorte ].
+	key = KeyboardKey down ifTrue: [ self person irAlSur ].
+	key = KeyboardKey right ifTrue: [ self person irAlEste ].
+	key = KeyboardKey left ifTrue: [ self person irAlOeste ].
+	key value = 65 ifTrue:[self person atacar].
+
+]
+
+{ #category : #acciones }
+LaberintoGUI >> lanzarBichos [
+	self juego lanzarBichos 
 ]
 
 { #category : #accessing }
@@ -221,12 +273,60 @@ LaberintoGUI >> mLB: anObject [
 ]
 
 { #category : #'as yet unclassified' }
+LaberintoGUI >> mostrarAbrirPuertas [
+	mAP:=SimpleButtonMorph new target:self; label: 'Abrir'; actionSelector: #abrirPuertas.
+	self addMorph: mAP.
+	mAP position:self position +(5@70).
+
+]
+
+{ #category : #'as yet unclassified' }
+LaberintoGUI >> mostrarDetenerBichos [
+	
+	mLB:=SimpleButtonMorph new target:self; label: 'Detener'; actionSelector: #terminarBichos.
+	self addMorph: self mLB.
+	self mLB position:self position +(5@160).
+
+]
+
+{ #category : #'as yet unclassified' }
 LaberintoGUI >> mostrarLaberinto [
 	self calcularPosicion. "calcula la posición relativa de las habitaciones respecto de la hab1"
 	self normalizar."traslación de todo el laberinto para que no haya coordenadas negativas"
 	self calcularDimensiones. "repartir el ancho y alto del canvas entre las habitaciones"
 	self asignarPuntosReales. "asigna las posiciones a cada contenedor (forma)"
 
+]
+
+{ #category : #'as yet unclassified' }
+LaberintoGUI >> mostrarLanzarBichos [
+	
+	mLB:=SimpleButtonMorph new target:self; label: 'Iniciar'; actionSelector: #lanzarBichos.
+	self addMorph: self mLB.
+	self mLB position:self position +(5@130).
+
+]
+
+{ #category : #'as yet unclassified' }
+LaberintoGUI >> mostrarPersonaje [
+
+	| unCont an al a b c d rec |
+	self person ifNil: [ ^ self ].
+	unCont := self person posicion.
+	an := unCont extent x.
+	al := unCont extent y.
+	a := unCont punto x + (an // 2).
+	b := unCont punto y + (al // 2).
+	c := an // 9.
+	d := al // 8.
+	self personM ifNil: [
+		rec := BorderedMorph new extent: c @ d.
+		rec borderWidth: 2.
+		rec color: Color black.
+		self addMorph: rec.
+		self personM: rec
+		"self personM openInWorld." ].
+	self personM position: self position + (a @ b)
 ]
 
 { #category : #'as yet unclassified' }
@@ -244,6 +344,18 @@ LaberintoGUI >> mostrarVidasPersonaje [
 		self vidasM:tM.
 	].
 	self vidasM contents:' ',self person vidas asString,' '.
+
+]
+
+{ #category : #'event handling' }
+LaberintoGUI >> mouseEnter: anEvent [
+	anEvent hand newKeyboardFocus: self
+
+]
+
+{ #category : #'event handling' }
+LaberintoGUI >> mouseLeave: anEvent [
+	anEvent hand releaseKeyboardFocus: self
 
 ]
 
@@ -285,11 +397,27 @@ LaberintoGUI >> personM: anObject [
 	personM := anObject
 ]
 
+{ #category : #acciones }
+LaberintoGUI >> reset [
+
+	self juego terminarBichos.
+	self personM: nil.
+	self bichosM: Dictionary new.
+	self win ifNotNil: [ self win delete ].
+	self iniciarJuego
+
+]
+
+{ #category : #acciones }
+LaberintoGUI >> terminarBichos [
+	self juego terminarBichos 
+]
+
 { #category : #updating }
 LaberintoGUI >> update:unObject [
 
 	self mostrarVidasPersonaje.
-	"self mostrarPersonaje."
+	self mostrarPersonaje.
 	"self mostrarBichos."
 
 ]
