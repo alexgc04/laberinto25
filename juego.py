@@ -44,7 +44,7 @@ class Puerta(ElementoMapa):
             print("La puerta está abierta")
         else:
             print("La puerta está cerrada")
-
+#hola
 
 class Habitacion(ElementoMapa):
     def __init__(self, num):
