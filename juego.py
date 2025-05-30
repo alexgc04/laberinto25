@@ -1,34 +1,28 @@
 class ElementoMapa:
-    def __init__(self):
-        pass
-
-    def entrar(self):
+    def entrar(self, bicho=None):
         raise NotImplementedError("Método debe ser implementado en la subclase")
 
 
 class Pared(ElementoMapa):
-    def __init__(self):
-        super().__init__()
-
-    def entrar(self):
+    def entrar(self, bicho=None):
         print("Te has chocado con la pared")
 
 
 class ParedBomba(Pared):
     def __init__(self, activa=False):
-        super().__init__()
         self.activa = activa
 
-    def entrar(self):
+    def entrar(self, bicho=None):
         if self.activa:
             print("¡Bomba explotó!")
+            if bicho:
+                bicho.vidas -= 1
         else:
             print("Te has chocado con la pared bomba")
 
 
 class Puerta(ElementoMapa):
     def __init__(self, lado1, lado2):
-        super().__init__()
         self.abierta = False
         self.lado1 = lado1
         self.lado2 = lado2
@@ -39,33 +33,43 @@ class Puerta(ElementoMapa):
     def cerrar(self):
         self.abierta = False
 
-    def entrar(self):
+    def entrar(self, bicho=None):
         if self.abierta:
             print("La puerta está abierta")
         else:
             print("La puerta está cerrada")
-#hola
+
 
 class Habitacion(ElementoMapa):
     def __init__(self, num):
-        super().__init__()
         self.num = num
         self.norte = None
         self.sur = None
         self.este = None
         self.oeste = None
+        self.elementos = []
 
-    def entrar(self):
+    def entrar(self, bicho=None):
         print(f"Estás en la habitación {self.num}")
+        for elemento in self.elementos:
+            elemento.entrar(bicho)
+
+    def poner_elemento(self, elemento):
+        self.elementos.append(elemento)
 
 
 class Laberinto(ElementoMapa):
     def __init__(self):
-        super().__init__()
         self.habitaciones = []
 
     def agregar_habitacion(self, habitacion):
         self.habitaciones.append(habitacion)
+
+    def obtener_habitacion(self, num):
+        for h in self.habitaciones:
+            if h.num == num:
+                return h
+        return None
 
 
 class Modo:
@@ -80,11 +84,17 @@ class Modo:
 
 
 class Perezoso(Modo):
+    def camina(self, bicho):
+        print("El bicho camina lentamente.")
+
     def es_agresivo(self):
         return False
 
 
 class Agresivo(Modo):
+    def camina(self, bicho):
+        print("El bicho camina agresivamente.")
+
     def es_agresivo(self):
         return True
 
@@ -102,14 +112,20 @@ class Bicho:
     def es_agresivo(self):
         return self.modo.es_agresivo()
 
+    def mover_a(self, nueva_habitacion):
+        self.posicion = nueva_habitacion
+        nueva_habitacion.entrar(self)
 
-class Bomba:
+
+class Bomba(ElementoMapa):
     def __init__(self, activa=False):
         self.activa = activa
 
-    def entrar(self):
+    def entrar(self, bicho=None):
         if self.activa:
             print("¡Bomba explotó!")
+            if bicho:
+                bicho.vidas -= 1
         else:
             print("No pasó nada")
 
@@ -122,6 +138,9 @@ class Creator:
     def fabricar_bicho_agresivo(self):
         return Bicho(modo=Agresivo(), vidas=5, poder=5)
 
+    def fabricar_pared(self):
+        return Pared()
+
 
 class CreatorB(Creator):
     def fabricar_pared(self):
@@ -132,8 +151,8 @@ class Decorator(ElementoMapa):
     def __init__(self, elemento):
         self.elemento = elemento
 
-    def entrar(self):
-        self.elemento.entrar()
+    def entrar(self, bicho=None):
+        self.elemento.entrar(bicho)
 
 
 class Juego:
@@ -161,6 +180,10 @@ class Juego:
         hab3.este = puerta3
         hab4.oeste = puerta3
 
+        hab1.poner_elemento(Pared())
+        hab2.poner_elemento(ParedBomba(activa=True))
+        hab3.poner_elemento(Bomba(activa=True))
+
         self.laberinto.agregar_habitacion(hab1)
         self.laberinto.agregar_habitacion(hab2)
         self.laberinto.agregar_habitacion(hab3)
@@ -169,7 +192,17 @@ class Juego:
     def jugar(self):
         self.crear_laberinto()
         print("¡Bienvenido al juego del laberinto!")
+        bicho = Bicho(posicion=self.laberinto.obtener_habitacion(1))
+        self.agregar_bicho(bicho)
+        bicho.posicion.entrar(bicho)
+        # Ejemplo de movimiento:
+        if bicho.posicion.este:
+            print("Intentando ir al este...")
+            bicho.posicion.este.abrir()
+            bicho.mover_a(self.laberinto.obtener_habitacion(2))
+        print(f"Vidas restantes del bicho: {bicho.vidas}")
 
 
-juego = Juego()
-juego.jugar()
+if __name__ == "__main__":
+    juego = Juego()
+    juego.jugar()
