@@ -1,7 +1,7 @@
-import Comando
+from Comando import Comando
 
 
 class Entrar(Comando):
-
-    def ejecutar(self,alguien):
-        self.receptor.entrar(alguien)
+    def __init__(self, receptor=None):
+        super().__init__(receptor)
+    

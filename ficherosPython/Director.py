@@ -3,6 +3,7 @@ from LaberintoBuilder import LaberintoBuilder
 #from LaberintoBuilderHexagono import LaberintoBuilderHexagono
 #from LaberintoBuilderOctogono import LaberintoBuilderOctogono
 from LaberintoBuilderRombo import LaberintoBuilderRombo
+from LaberintoBuilderL import LaberintoBuilderL
 
 
 class Director:
@@ -12,15 +13,12 @@ class Director:
         self.dict = None
 
     def fabricarBichos(self):
-        bichos = self.dict.get('bichos', None)
-        if bichos is None:
-            return  
-
-        for each in bichos:
-            self.builder.fabricarBichoModo(
-                each.get('modo'),  # Modo del bicho
-                each.get('posicion')  # Posición del bicho
-            )
+        for bicho in self.dict.get("bichos", []):
+            if "modo" in bicho:
+                self.builder.fabricarBichoModo(
+                    bicho.get("modo"),
+                    bicho.get("posicion")
+                )
 
     def fabricarJuego(self):
         self.builder.fabricarJuego()
@@ -62,10 +60,8 @@ class Director:
             self.builder = LaberintoBuilder()
         elif self.dict.get('forma') == 'rombo':
             self.builder = LaberintoBuilderRombo()
-        #elif self.dict.get('forma') == 'hexagono':
-        #    self.builder = LaberintoBuilderHexagono()
-        #elif self.dict.get('forma') == 'octogono':
-        #    self.builder = LaberintoBuilderOctogono()
+        if self.dict.get("forma") == "L":
+            self.builder = LaberintoBuilderL()
 
     def leerArchivo(self, unArchivoJSON):
     
@@ -78,6 +74,7 @@ class Director:
     def procesar(self, unArchivoJSON):
         self.leerArchivo(unArchivoJSON)
         self.iniBuilder()
-        self.fabricarLaberinto()
+        self.builder.fabricarLaberinto()  # Inicializa self.laberinto
+        self.fabricarLaberinto()          # Ahora puedes fabricar habitaciones
         self.fabricarJuego()
         self.fabricarBichos()

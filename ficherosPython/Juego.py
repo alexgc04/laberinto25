@@ -249,6 +249,21 @@ class Juego:
     def obtenerHabitacion(self,unNum):
         return self.laberinto.obtenerHabitacion(unNum)
     
+    def habitaciones(self):
+        return self.laberinto.habitaciones 
+    
 
     def __str__(self):
         return "Juego"
+
+    def activarBombas(self):
+        for hab in self.laberinto.hijos:
+            for hijo in getattr(hab, "hijos", []):
+                if hasattr(hijo, "activar") and callable(hijo.activar):
+                    hijo.activar()
+
+    def desactivarBombas(self):
+        for hab in self.laberinto.hijos:
+            for hijo in getattr(hab, "hijos", []):
+                if hasattr(hijo, "desactivar") and callable(hijo.desactivar):
+                    hijo.desactivar()

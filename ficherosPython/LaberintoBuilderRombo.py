@@ -1,5 +1,6 @@
 from LaberintoBuilder import LaberintoBuilder
 from Rombo import Rombo
+from Laberinto import Laberinto
 
 
 class LaberintoBuilderRombo(LaberintoBuilder):
@@ -14,3 +15,7 @@ class LaberintoBuilderRombo(LaberintoBuilder):
         forma.agregarOrientacion(self.fabricarSuroeste())
         forma.agregarOrientacion(self.fabricarNoroeste())
         return forma
+
+    def fabricarLaberinto(self):
+        self.laberinto = Laberinto()
+        # Aquí va la lógica para crear habitaciones en forma de rombo

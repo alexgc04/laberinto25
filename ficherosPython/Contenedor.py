@@ -1,11 +1,13 @@
 from Cuadrado import Cuadrado
 from ElementoMapa import ElementoMapa
+from Forma import Forma
 
 class Contenedor(ElementoMapa):
 
     def __init__(self):
         super().__init__()
         self.hijos = []
+        self.forma = Forma()
 
 
     def getextent(self):

@@ -1,10 +1,12 @@
 from Contenedor import Contenedor
+from Forma import Forma
 
 class Habitacion(Contenedor):
 
     def __init__(self):
         super().__init__()
         self.num = None
+        self.forma = Forma()
     
     def esHabitacion(self):
         return True

@@ -1,95 +1,102 @@
-import random
-from Creator import Creator
 from Director import Director
 from Juego import Juego
+from BichoCurativo import BichoCurativo
+from BichoAcompañante import BichoAcompañante
+
+def comprobar_fin_juego(juego):
+    if not juego.person.estaVivo():
+        print("¡Fin del juego! El personaje ha muerto. Has perdido.")
+        exit(0)
+    enemigos = [b for b in juego.bichos if not isinstance(b, (BichoCurativo, BichoAcompañante))]
+    if all(not b.estaVivo() for b in enemigos):
+        print("¡Fin del juego! No quedan bichos enemigos vivos. ¡Has ganado!")
+        exit(0)
 
 def main():
-    juego = Juego()
-    fm = Creator()
-    juego.crearLaberinto2HabitacionesFM(fm)
-    juego.crearLaberinto4H4BFM(fm)
-    print(f"{juego.obtenerHabitacion(1)}")
-    print(f"{juego.obtenerHabitacion(2)}")
-    print(f"{juego.obtenerHabitacion(3)}")
-    print(f"{juego.obtenerHabitacion(4)}")
-    print(f"{juego.obtenerHabitacion(1).obtenerElementoOr(fm.fabricarNorte())}")
-    print(f"{juego.obtenerHabitacion(1).obtenerElementoOr(fm.fabricarEste())}")
-    print(f"{juego.obtenerHabitacion(1).obtenerElementoOr(fm.fabricarSur())}")
-    print(f"{juego.obtenerHabitacion(1).obtenerElementoOr(fm.fabricarOeste())}")
-    print(f"{juego.obtenerHabitacion(2).obtenerElementoOr(fm.fabricarNorte())}")
-    print(f"{juego.obtenerHabitacion(2).obtenerElementoOr(fm.fabricarEste())}") 
-    print(f"{juego.obtenerHabitacion(2).obtenerElementoOr(fm.fabricarSur())}")
-    print(f"{juego.obtenerHabitacion(2).obtenerElementoOr(fm.fabricarOeste())}")
-    print(f"{juego.obtenerHabitacion(3).obtenerElementoOr(fm.fabricarNorte())}")
-    print(f"{juego.obtenerHabitacion(3).obtenerElementoOr(fm.fabricarEste())}")
-    print(f"{juego.obtenerHabitacion(3).obtenerElementoOr(fm.fabricarSur())}")
-    print(f"{juego.obtenerHabitacion(3).obtenerElementoOr(fm.fabricarOeste())}")
-    print(f"{juego.obtenerHabitacion(4).obtenerElementoOr(fm.fabricarNorte())}")
-    print(f"{juego.obtenerHabitacion(4).obtenerElementoOr(fm.fabricarEste())}")
-    print(f"{juego.obtenerHabitacion(4).obtenerElementoOr(fm.fabricarSur())}")
-    print(f"{juego.obtenerHabitacion(4).obtenerElementoOr(fm.fabricarOeste())}")
-    print(f"{juego.bichos[0]} {juego.bichos[0].posicion}")
-    print(f"{juego.bichos[1]} {juego.bichos[1].posicion}")
-    print(f"{juego.bichos[2]} {juego.bichos[2].posicion}")
-    print(f"{juego.bichos[3]} {juego.bichos[3].posicion}")
+    # Ruta al JSON (ajusta según tu estructura)
+    ruta = r"C:\Users\Alex gc\Desktop\3 CURSO INFORMATICA\2nd cuatri TERCERO\Diseño de software\COSAS CLASE Star UML\labLnuevo.json"
+
+    director = Director()
+    director.procesar(ruta)
+    juego = director.obtenerJuego()
+
+    print(juego)
+
+    juego.agregarPersonaje("Alejandro")
+    juego.lanzarBichos()
+    comprobar_fin_juego(juego)
+    juego.terminarBichos()
+    comprobar_fin_juego(juego)
+
+    person = juego.person
+    lista = person.obtenerComandos()  # Si tienes este método
+    if lista and len(lista) > 1:
+        lista[1].ejecutar(person)
+        comprobar_fin_juego(juego)
 
     hab1 = juego.obtenerHabitacion(1)
-    print(f"{hab1.obtenerElementoOr(fm.fabricarSur())}")
-    juego.abrirPuertas()
-    juego.cerrarPuertas()
-    juego.abrirPuertas()
-    ba1 = juego.bichos[0]
-    print(f"{ba1.posicion}")
     hab2 = juego.obtenerHabitacion(2)
-    hab2.entrar(ba1)
-    print(f"{ba1.estaVivo()}")
-    ba1.vidas = 10
-    juego.agregarPersonaje("Surmania")
-    ba1.actua()
-    juego.lanzarBichos()
-    #juego.terminarBicho(ba1)
-    #juego.terminarBichos()
+    if hab2.hijos:
+        tunerl = hab2.hijos[0]
+        # ...lo que quieras hacer con tunerl...
+    else:
+        print("Habitación 2 no tiene hijos.")
+
+    bicho = juego.bichos[0]
     person = juego.person
-    person.irAlEste()
-    person.irAlOeste()
+
+    hab1.entrar(bicho)
+    hab1.entrar(person)
+    comprobar_fin_juego(juego)
+
+    # Buscar tunel en la posición del bicho
+    unBicho = juego.bichos[0]
+    unCont = unBicho.posicion
+    tunel = next((each for each in unCont.hijos if each.esTunel()), None)
+    if tunel:
+        tunel.entrar(unBicho)
+        comprobar_fin_juego(juego)
+
+    print("Vidas antes:", person.vidas)
+    person.atacar()
+    comprobar_fin_juego(juego)
+    print("Vidas después:", person.vidas)
+
+    if hab1.hijos:
+        arm = hab1.hijos[0]
+        arm.entrar(person)
+        hab1.entrar(person)
+        comprobar_fin_juego(juego)
+
     person.irAlNorte()
+    comprobar_fin_juego(juego)
     person.irAlSur()
-    person.atacar()
-    person.atacar()
-    person.atacar()
-    person.atacar()
-    person.atacar()
-    person.atacar()
-    person.atacar()
-    person.atacar()
-    person.atacar()
-    person.atacar()
-    person.atacar()
-    person.atacar()
-    person.atacar()
-    person.atacar()
-    person.atacar()
-    person.atacar()
-    person.atacar()
-    person.atacar()
-    person.atacar()
-    person.atacar()
-    person.atacar()
-    person.atacar()
-    person.atacar()
-    person.atacar()
-    director = Director()
-    #director.procesar(r'C:\Users\alexr\Desktop\UCLM\Ano_3\Cuatrimestre 2\Diseño software\laberintos\lab2HTunel.json')
-    #juego= director.obtenerJuego()
-    juego.lanzarBichos()
-    juego.terminarBichos()
+    comprobar_fin_juego(juego)
     person.irAlEste()
+    comprobar_fin_juego(juego)
     person.irAlOeste()
-    person.irAlNorte()
-    person.irAlSur()
+    comprobar_fin_juego(juego)
+
     juego.abrirPuertas()
     juego.cerrarPuertas()
+    juego.activarBombas()
+    juego.desactivarBombas()
+    comprobar_fin_juego(juego)
 
+    # Abre y muestra todas las puertas
+    juego.laberinto.recorrer(lambda each: (each.abrir() if each.esPuerta() else None, print(each) if each.esPuerta() else None))
+
+    ba1 = juego.bichos[0]
+    print(ba1.posicion)
+    ba1.actua()
+    comprobar_fin_juego(juego)
+    print(ba1.estaVivo())
+    ba1.vidas = 10
+
+    juego.lanzarBicho(ba1)
+    comprobar_fin_juego(juego)
+    juego.terminarBicho(ba1)
+    comprobar_fin_juego(juego)
 
 if __name__ == "__main__":
     main()

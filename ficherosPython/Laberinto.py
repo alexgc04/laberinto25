@@ -49,3 +49,11 @@ class Laberinto(Contenedor):
 
     def __str__(self):
         return "Laberinto"
+
+    def imprimir_si_puerta(each):
+        from Juego import juego
+        if each.esPuerta():
+            each.abrir()
+        print(each)
+
+        juego.laberinto.recorrer(lambda each: (each.abrir() if each.esPuerta() else None, print(each)))

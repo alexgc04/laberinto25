@@ -14,6 +14,8 @@ from Puerta import Puerta
 from Sur import Sur
 from Tunel import Tunel
 
+
+
 class LaberintoBuilder:
 
     def __init__(self):
@@ -21,6 +23,7 @@ class LaberintoBuilder:
         self.juego = None
 
     def fabricarArmario(self, unNum, unContenedor):
+        self.laberinto = Laberinto()  # Asegúrate de que el laberinto esté inicializado
     
         from Armario import Armario  # Importa aquí para evitar dependencias circulares si las hay
 
@@ -65,14 +68,16 @@ class LaberintoBuilder:
         return bicho
     
     def fabricarBichoModo(self, strModo, unNum):
-    
+        if not strModo:
+            raise ValueError("El modo del bicho no puede ser None o vacío. Revisa el JSON.")
         hab = self.juego.obtenerHabitacion(unNum)
-
-        bicho = getattr(self, f"fabricarBicho{strModo.capitalize()}")()
-
+        metodo = f"fabricarBicho{strModo.capitalize()}"
+        if not hasattr(self, metodo):
+            raise AttributeError(f"No existe el método {metodo} en LaberintoBuilder. Revisa el modo en el JSON.")
+        bicho = getattr(self, metodo)()
         hab.entrar(bicho)
-
         self.juego.agregarBicho(bicho)
+
 
     def fabricarBombaEn(self, unContenedor):
         bmb = Bomba()

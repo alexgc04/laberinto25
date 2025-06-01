@@ -1,11 +1,12 @@
 from Muerto import Muerto
 from Vivo import Vivo
-
+from EstadoEnte import EstadoEnte
+vidas = 100  # Valor por defecto para las vidas del ente
 
 class Ente:
 
     def __init__(self):
-        self.vidas = None
+        self.vidas = vidas
         self.poder = None
         self.estadoEnte = Vivo()
 
