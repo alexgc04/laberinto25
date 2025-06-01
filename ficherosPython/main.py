@@ -1,16 +1,17 @@
 from Director import Director
 from Juego import Juego
-from BichoCurativo import BichoCurativo
-from BichoAcompañante import BichoAcompañante
+from Curativo import Curativo
+from Acompañante import Acompañante
 
 def comprobar_fin_juego(juego):
     if not juego.person.estaVivo():
         print("¡Fin del juego! El personaje ha muerto. Has perdido.")
-        exit(0)
-    enemigos = [b for b in juego.bichos if not isinstance(b, (BichoCurativo, BichoAcompañante))]
+        return True
+    enemigos = [b for b in juego.bichos if not isinstance(b, (Curativo, Acompañante))]
     if all(not b.estaVivo() for b in enemigos):
         print("¡Fin del juego! No quedan bichos enemigos vivos. ¡Has ganado!")
-        exit(0)
+        return True
+    return False
 
 def main():
     # Ruta al JSON (ajusta según tu estructura)
@@ -24,15 +25,21 @@ def main():
 
     juego.agregarPersonaje("Alejandro")
     juego.lanzarBichos()
-    comprobar_fin_juego(juego)
+
+    # --- NUEVO: Hacer que curativo y acompañante sigan al personaje ---
+    for bicho in juego.bichos:
+        if isinstance(bicho.modo, (Curativo, Acompañante)):
+            bicho.posicion = juego.person.posicion
+
+    if comprobar_fin_juego(juego): return
     juego.terminarBichos()
-    comprobar_fin_juego(juego)
+    if comprobar_fin_juego(juego): return
 
     person = juego.person
     lista = person.obtenerComandos()  # Si tienes este método
     if lista and len(lista) > 1:
         lista[1].ejecutar(person)
-        comprobar_fin_juego(juego)
+        if comprobar_fin_juego(juego): return
 
     hab1 = juego.obtenerHabitacion(1)
     hab2 = juego.obtenerHabitacion(2)
@@ -47,7 +54,7 @@ def main():
 
     hab1.entrar(bicho)
     hab1.entrar(person)
-    comprobar_fin_juego(juego)
+    if comprobar_fin_juego(juego): return
 
     # Buscar tunel en la posición del bicho
     unBicho = juego.bichos[0]
@@ -55,33 +62,33 @@ def main():
     tunel = next((each for each in unCont.hijos if each.esTunel()), None)
     if tunel:
         tunel.entrar(unBicho)
-        comprobar_fin_juego(juego)
+        if comprobar_fin_juego(juego): return
 
     print("Vidas antes:", person.vidas)
     person.atacar()
-    comprobar_fin_juego(juego)
+    if comprobar_fin_juego(juego): return
     print("Vidas después:", person.vidas)
 
     if hab1.hijos:
         arm = hab1.hijos[0]
         arm.entrar(person)
         hab1.entrar(person)
-        comprobar_fin_juego(juego)
+        if comprobar_fin_juego(juego): return
 
     person.irAlNorte()
-    comprobar_fin_juego(juego)
+    if comprobar_fin_juego(juego): return
     person.irAlSur()
-    comprobar_fin_juego(juego)
+    if comprobar_fin_juego(juego): return
     person.irAlEste()
-    comprobar_fin_juego(juego)
+    if comprobar_fin_juego(juego): return
     person.irAlOeste()
-    comprobar_fin_juego(juego)
+    if comprobar_fin_juego(juego): return
 
     juego.abrirPuertas()
     juego.cerrarPuertas()
     juego.activarBombas()
     juego.desactivarBombas()
-    comprobar_fin_juego(juego)
+    if comprobar_fin_juego(juego): return
 
     # Abre y muestra todas las puertas
     juego.laberinto.recorrer(lambda each: (each.abrir() if each.esPuerta() else None, print(each) if each.esPuerta() else None))
@@ -89,14 +96,14 @@ def main():
     ba1 = juego.bichos[0]
     print(ba1.posicion)
     ba1.actua()
-    comprobar_fin_juego(juego)
+    if comprobar_fin_juego(juego): return
     print(ba1.estaVivo())
     ba1.vidas = 10
 
     juego.lanzarBicho(ba1)
-    comprobar_fin_juego(juego)
+    if comprobar_fin_juego(juego): return
     juego.terminarBicho(ba1)
-    comprobar_fin_juego(juego)
+    if comprobar_fin_juego(juego): return
 
 if __name__ == "__main__":
     main()

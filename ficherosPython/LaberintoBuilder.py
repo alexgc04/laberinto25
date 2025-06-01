@@ -13,6 +13,8 @@ from Pared import Pared
 from Puerta import Puerta
 from Sur import Sur
 from Tunel import Tunel
+from Curativo import Curativo
+from Acompañante import Acompañante
 
 
 
@@ -67,9 +69,24 @@ class LaberintoBuilder:
         bicho.poder = 1
         return bicho
     
+    def fabricarBichoCurativo(self):
+        bicho = Bicho()
+        bicho.modo = Curativo()
+        bicho.vidas = 5
+        bicho.poder = 0
+        return bicho
+    
+    def fabricarBichoAcompañante(self):
+        bicho = Bicho()
+        bicho.modo = Acompañante()
+        bicho.vidas = 5
+        bicho.poder = 2
+        return bicho
+    
     def fabricarBichoModo(self, strModo, unNum):
         if not strModo:
             raise ValueError("El modo del bicho no puede ser None o vacío. Revisa el JSON.")
+        #print("DEBUG modo:", repr(strModo))  # <-- Añade esto temporalmente
         hab = self.juego.obtenerHabitacion(unNum)
         metodo = f"fabricarBicho{strModo.capitalize()}"
         if not hasattr(self, metodo):

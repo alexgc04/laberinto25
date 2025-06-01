@@ -27,15 +27,22 @@ class Director:
         self.builder.fabricarLaberinto()
         laberinto = self.dict.get('laberinto', [])
         for each in laberinto:
-          self.fabricarLaberintoRecursivo(each, 'root')
+            self.fabricarLaberintoRecursivo(each, 'root')
         puertas = self.dict.get('puertas', [])
         for each in puertas:
-            self.builder.fabricarPuertaL1(
-                each[0],  # Número de la primera habitación
-                each[1],  # Orientación de la primera habitación
-                each[2],  # Número de la segunda habitación
-                each[3]   # Orientación de la segunda habitación
-            )
+            if isinstance(each, list):
+                # Puerta normal
+                self.builder.fabricarPuertaL1(
+                    each[0],  # Número de la primera habitación
+                    each[1],  # Orientación de la primera habitación
+                    each[2],  # Número de la segunda habitación
+                    each[3]   # Orientación de la segunda habitación
+                )
+            elif isinstance(each, dict) and each.get("tipo") == "PuertaMagica":
+                # Aquí deberías crear la puerta mágica según tu lógica
+                # Por ejemplo, podrías llamar a un método fabricarPuertaMagica
+                # self.builder.fabricarPuertaMagica(destino=each["destino"])
+                print("Puerta mágica detectada en el JSON")
 
     def fabricarLaberintoRecursivo(self, unDic, padre):
     
@@ -64,8 +71,7 @@ class Director:
             self.builder = LaberintoBuilderL()
 
     def leerArchivo(self, unArchivoJSON):
-    
-        with open(unArchivoJSON, 'r') as readStream:
+        with open(unArchivoJSON, 'r', encoding='utf-8') as readStream:
             self.dict = json.load(readStream)
 
     def obtenerJuego(self):
